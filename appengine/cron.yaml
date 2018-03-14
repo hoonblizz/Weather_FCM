@@ -1,0 +1,746 @@
+cron:
+# =================================================
+# UV Forecast Notification
+# =================================================
+- description: Push for Queue offset +13
+  url: /publish/utc_plus13
+  schedule: every day 08:00
+  timezone: Pacific/Chatham
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+#- description: Push for Queue offset +12
+#  url: /publish/utc_plus12
+#  schedule: every day 08:00
+#  timezone: Antarctica/McMurdo
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+- description: Push for Queue offset +11
+  url: /publish/utc_plus11
+  schedule: every day 08:00
+  timezone: Pacific/Ponape
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Queue offset +10
+  url: /publish/utc_plus10
+  schedule: every day 08:00
+  timezone: Antarctica/DumontDUrville
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Queue offset +09
+  url: /publish/utc_plus09
+  schedule: every day 08:00
+  timezone: Asia/Seoul
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Queue offset +08
+  url: /publish/utc_plus08
+  schedule: every day 08:00
+  timezone: Asia/Brunei
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Queue offset +07
+  url: /publish/utc_plus07
+  schedule: every day 08:00
+  timezone: Asia/Barnaul
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Queue offset +06
+  url: /publish/utc_plus06
+  schedule: every day 08:00
+  timezone: Antarctica/Vostok
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Queue offset +05
+  url: /publish/utc_plus05
+  schedule: every day 08:00
+  timezone: Antarctica/Mawson
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+#- description: Push for Queue offset +04
+#  url: /publish/utc_plus04
+#  schedule: every day 08:00
+#  timezone: Asia/Baku
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+- description: Push for Queue offset +03
+  url: /publish/utc_plus03
+  schedule: every day 08:00
+  timezone: Africa/Addis_Ababa
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Queue offset +02
+  url: /publish/utc_plus02
+  schedule: every day 08:00
+  timezone: Africa/Blantyre
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Queue offset +01
+  url: /publish/utc_plus01
+  schedule: every day 08:00
+  timezone: Africa/Algiers
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Queue offset +0
+  url: /publish/utc_plus0
+  schedule: every day 08:00
+  timezone: Africa/Abidjan
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+#- description: Push for Queue offset -01
+#  url: /publish/utc_minus01
+#  schedule: every day 08:00
+#  timezone: America/Scoresbysund
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+#- description: Push for Queue offset -02
+#  url: /publish/utc_minus02
+#  schedule: every day 08:00
+#  timezone: America/Noronha
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+- description: Push for Queue offset -03
+  url: /publish/utc_minus03
+  schedule: every day 08:00
+  timezone: Atlantic/Stanley
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Queue offset -04
+  url: /publish/utc_minus04
+  schedule: every day 08:00
+  timezone: America/Marigot
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Queue offset -05
+  url: /publish/utc_minus05
+  schedule: every day 08:00
+  timezone: America/Toronto
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Queue offset -06
+  url: /publish/utc_minus06
+  schedule: every day 08:00
+  timezone: America/Tegucigalpa
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Queue offset -07
+  url: /publish/utc_minus07
+  schedule: every day 08:00
+  timezone: America/Yellowknife
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Queue offset -08
+  url: /publish/utc_minus08
+  schedule: every day 08:00
+  timezone: America/Vancouver
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+#- description: Push for Queue offset -09
+#  url: /publish/utc_minus09
+#  schedule: every day 08:00
+#  timezone: America/Yakutat
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+#- description: Push for Queue offset -10
+#  url: /publish/utc_minus10
+#  schedule: every day 08:00
+#  timezone: Pacific/Honolulu
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+# =================================================
+# Rain, Snow, Sleet Forecast Notification
+# =================================================
+- description: Push for Rain Notification Queue offset +13
+  url: /publish/utc_plus13_rain
+  schedule: every day 7:30
+  timezone: Pacific/Chatham
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+#- description: Push for Rain Notification Queue offset +12
+#  url: /publish/utc_plus12_rain
+#  schedule: every day 7:30
+#  timezone: Antarctica/McMurdo
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset +11
+  url: /publish/utc_plus11_rain
+  schedule: every day 7:30
+  timezone: Pacific/Ponape
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset +10
+  url: /publish/utc_plus10_rain
+  schedule: every day 7:30
+  timezone: Antarctica/DumontDUrville
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset +09
+  url: /publish/utc_plus09_rain
+  schedule: every day 7:30
+  timezone: Asia/Seoul
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset +08
+  url: /publish/utc_plus08_rain
+  schedule: every day 7:30
+  timezone: Asia/Brunei
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset +07
+  url: /publish/utc_plus07_rain
+  schedule: every day 7:30
+  timezone: Asia/Hovd
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset +06
+  url: /publish/utc_plus06_rain
+  schedule: every day 7:30
+  timezone: Antarctica/Vostok
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset +05
+  url: /publish/utc_plus05_rain
+  schedule: every day 7:30
+  timezone: Antarctica/Mawson
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+#- description: Push for Rain Notification Queue offset +04
+#  url: /publish/utc_plus04_rain
+#  schedule: every day 7:30
+#  timezone: Asia/Baku
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset +03
+  url: /publish/utc_plus03_rain
+  schedule: every day 7:30
+  timezone: Africa/Addis_Ababa
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset +02
+  url: /publish/utc_plus02_rain
+  schedule: every day 7:30
+  timezone: Africa/Blantyre
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset +01
+  url: /publish/utc_plus01_rain
+  schedule: every day 7:30
+  timezone: Africa/Algiers
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset +0
+  url: /publish/utc_plus0_rain
+  schedule: every day 7:30
+  timezone: Africa/Abidjan
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+#- description: Push for Rain Notification Queue offset -01
+#  url: /publish/utc_minus01_rain
+#  schedule: every day 7:30
+#  timezone: America/Scoresbysund
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+#- description: Push for Rain Notification Queue offset -02
+#  url: /publish/utc_minus02_rain
+#  schedule: every day 7:30
+#  timezone: America/Noronha
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset -03
+  url: /publish/utc_minus03_rain
+  schedule: every day 7:30
+  timezone: Atlantic/Stanley
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset -04
+  url: /publish/utc_minus04_rain
+  schedule: every day 7:30
+  timezone: America/Dominica
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset -05
+  url: /publish/utc_minus05_rain
+  schedule: every day 7:30
+  timezone: America/Toronto
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset -06
+  url: /publish/utc_minus06_rain
+  schedule: every day 7:30
+  timezone: America/Tegucigalpa
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset -07
+  url: /publish/utc_minus07_rain
+  schedule: every day 7:30
+  timezone: America/Yellowknife
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Push for Rain Notification Queue offset -08
+  url: /publish/utc_minus08_rain
+  schedule: every day 7:30
+  timezone: America/Vancouver
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+#- description: Push for Rain Notification Queue offset -09
+#  url: /publish/utc_minus09_rain
+#  schedule: every day 7:30
+#  timezone: America/Yakutat
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+#- description: Push for Rain Notification Queue offset -10
+#  url: /publish/utc_minus10_rain
+#  schedule: every day 7:30
+#  timezone: Pacific/Honolulu
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+#- description: Push for weather data
+#  url: /publish/setForecastData
+#  schedule: every 5 minutes from 00:01 to 6:00
+#  timezone: America/Toronto
+
+# =================================================
+# Collecting Weather Data - replacing 'setForecastData' above
+# Written in Jan.31.2018
+# =================================================
+- description: Get weather data offset +13
+  url: /publish/utc_plus13_getWeather
+  schedule: every 5 minutes from 6:30 to 7:00
+  timezone: Pacific/Chatham
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+#- description: Get weather data offset +12
+#  url: /publish/utc_plus12_getWeather
+#  schedule: every 5 minutes from 6:00 to 7:00
+#  timezone: Antarctica/McMurdo
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+- description: Get weather data offset +11
+  url: /publish/utc_plus11_getWeather
+  schedule: every 5 minutes from 6:30 to 7:00
+  timezone: Pacific/Ponape
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Get weather data offset +10
+  url: /publish/utc_plus10_getWeather
+  schedule: every 5 minutes from 6:30 to 7:00
+  timezone: Antarctica/DumontDUrville
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Get weather data offset +09
+  url: /publish/utc_plus09_getWeather
+  schedule: every 5 minutes from 6:30 to 7:00
+  timezone: Asia/Seoul
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Get weather data offset +08
+  url: /publish/utc_plus08_getWeather
+  schedule: every 5 minutes from 6:30 to 7:00
+  timezone: Asia/Brunei
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Get weather data offset +07
+  url: /publish/utc_plus07_getWeather
+  schedule: every 5 minutes from 6:30 to 7:00
+  timezone: Asia/Hovd
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Get weather data offset +06
+  url: /publish/utc_plus06_getWeather
+  schedule: every 5 minutes from 6:30 to 7:00
+  timezone: Antarctica/Vostok
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Get weather data offset +05
+  url: /publish/utc_plus05_getWeather
+  schedule: every 5 minutes from 6:30 to 7:00
+  timezone: Antarctica/Mawson
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+#- description: Get weather data offset +04
+#  url: /publish/utc_plus04_getWeather
+#  schedule: every 5 minutes from 6:00 to 7:00
+#  timezone: Asia/Baku
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+- description: Get weather data offset +03
+  url: /publish/utc_plus03_getWeather
+  schedule: every 5 minutes from 6:30 to 7:00
+  timezone: Africa/Addis_Ababa
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Get weather data offset +02
+  url: /publish/utc_plus02_getWeather
+  schedule: every 5 minutes from 6:30 to 7:00
+  timezone: Africa/Blantyre
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Get weather data offset +01
+  url: /publish/utc_plus01_getWeather
+  schedule: every 5 minutes from 6:30 to 7:00
+  timezone: Africa/Algiers
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Get weather data offset +00
+  url: /publish/utc_plus0_getWeather
+  schedule: every 5 minutes from 6:30 to 7:00
+  timezone: Africa/Abidjan
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+#- description: Get weather data offset -01
+#  url: /publish/utc_minus01_getWeather
+#  schedule: every 5 minutes from 6:00 to 7:00
+#  timezone: America/Scoresbysund
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+#- description: Get weather data offset -02
+#  url: /publish/utc_minus02_getWeather
+#  schedule: every 5 minutes from 05:30 to 7:00
+#  timezone: America/Noronha
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+- description: Get weather data offset -03
+  url: /publish/utc_minus03_getWeather
+  schedule: every 5 minutes from 06:30 to 7:00
+  timezone: Atlantic/Stanley
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Get weather data offset -04
+  url: /publish/utc_minus04_getWeather
+  schedule: every 5 minutes from 06:30 to 7:00
+  timezone: America/Dominica
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Get weather data offset -05
+  url: /publish/utc_minus05_getWeather
+  schedule: every 5 minutes from 06:00 to 7:00
+  timezone: America/Toronto
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Get weather data offset -06
+  url: /publish/utc_minus06_getWeather
+  schedule: every 5 minutes from 06:30 to 7:00
+  timezone: America/Tegucigalpa
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Get weather data offset -07
+  url: /publish/utc_minus07_getWeather
+  schedule: every 5 minutes from 6:30 to 7:00
+  timezone: America/Yellowknife
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+- description: Get weather data offset -08
+  url: /publish/utc_minus08_getWeather
+  schedule: every 5 minutes from 6:30 to 7:00
+  timezone: America/Vancouver
+  retry_parameters:
+    job_retry_limit: 5
+    job_age_limit: 1h
+    min_backoff_seconds: 60
+    max_doublings: 5
+
+#- description: Get weather data offset -09
+#  url: /publish/utc_minus09_getWeather
+#  schedule: every 5 minutes from 6:00 to 7:00
+#  timezone: America/Yakutat
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+#- description: Get weather data offset -10
+#  url: /publish/utc_minus10_getWeather
+#  schedule: every 5 minutes from 6:00 to 7:00
+#  timezone: Pacific/Honolulu
+#  retry_parameters:
+#    job_retry_limit: 5
+#    job_age_limit: 1h
+#    min_backoff_seconds: 60
+#    max_doublings: 5
+
+
+# =================================================
+# Organize location by offset (So I don't have to sort and filter later)
+# Enable when needed.
+# Written in Jan.31.2018
+# =================================================
+#- description: Organize Location Data by offset
+#  url: /publish/organizeLocationByOffset
+#  schedule: every day 00:01
+#  timezone: America/Toronto

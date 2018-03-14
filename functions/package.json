@@ -1,0 +1,11 @@
+{
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "dependencies": {
+    "@google-cloud/bigquery": "^0.9.6",
+    "dark-sky": "^1.0.10",
+    "firebase-admin": "^4.1.2",
+    "firebase-functions": "^0.8.1"
+  },
+  "private": true
+}
