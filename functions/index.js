@@ -60,13 +60,17 @@ queueNotificationJobs.prototype = {
 	  		snapWeather.forEach((eachLocation) => {
 
 	        // Aug.08.2017 - Cloudiness is added. Be sure that database has this data
-	        // icon is added Sept.22.2017
-	        // tempMax, min is added Feb.05.2018
+	        // Sept.22.2017 - icon is added 
+	        // Feb.05.2018 - tempMax, min is added 
+	        // Mar.27.2018 - Daylight saving causes to fire notification twice. Compare offset.
+	        // If offset is matching OR offset is not exactly matching but rounded offset is matching.
 	        if(eachLocation.val() 
 	          && eachLocation.val().hasOwnProperty('cloudiness')
 	          && eachLocation.val().hasOwnProperty('icon') 
 	          && eachLocation.val().hasOwnProperty('tempMax')
-	          && eachLocation.val().hasOwnProperty('tempMin')) {     
+	          && eachLocation.val().hasOwnProperty('tempMin')
+	          && eachLocation.val().hasOwnProperty('tzOffsetRound')
+	          && (eachLocation.val().tzOffset == offset || (eachLocation.val().tzOffset !== offset && eachLocation.val().tzOffsetRound == offset))) {     
 
 	          // Match with current time
 	          var callUtil = new backendUtil();
@@ -286,7 +290,8 @@ cronWeatherDataJobs.prototype = {
 			.then((snapshot) => {
 
 				snapshot.forEach((res) => {
-	        if(res.val().lat && res.val().lng && res.val().country && res.val().city) {
+	        if(res.val().hasOwnProperty('lat') && res.val().hasOwnProperty('lng') 
+	        	&& res.val().hasOwnProperty('country') && res.val().hasOwnProperty('city')) {
 
 	          var topic = new backendUtil().createTopicName(res.val().country, res.val().city);
 
@@ -300,7 +305,13 @@ cronWeatherDataJobs.prototype = {
 	            checkLastTimeUpdated = new backendUtil().checkLastTimeForecastUpdated(res.val().currentTime);
 	          }
 
-	          var finalDecision = (checkTopic && checkLastTimeUpdated) ? true : false;
+	          // Mar.27.2018 - Check if it's really a valid offset. (Daylight saving issue: offset becomes different)
+	          var checkOffsetMatching = true;
+	          if(res.val().hasOwnProperty('tzOffset')) {
+	          	checkOffsetMatching = (res.val().tzOffset == offset);
+	          }
+
+	          var finalDecision = (checkTopic && checkLastTimeUpdated && checkOffsetMatching) ? true : false;
 	          
 	          topicsArray.push(topic);
 	          topicsCoordArray.push({
