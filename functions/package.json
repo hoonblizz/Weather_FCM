@@ -2,10 +2,12 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "dependencies": {
-    "@google-cloud/bigquery": "^0.9.6",
-    "dark-sky": "^1.0.10",
-    "firebase-admin": "^4.1.2",
-    "firebase-functions": "^0.8.1"
+    "@google-cloud/bigquery": "^1.0.0",
+    "@google-cloud/datastore": "^1.4.0",
+    "dark-sky": "^1.1.2",
+    "firebase-admin": "^5.11.0",
+    "firebase-functions": "^0.9.1",
+    "in-app-purchase": "^1.8.9"
   },
   "private": true
 }

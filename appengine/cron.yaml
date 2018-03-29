@@ -744,3 +744,19 @@ cron:
 #  url: /publish/organizeLocationByOffset
 #  schedule: every day 00:01
 #  timezone: America/Toronto
+
+# =================================================
+# Mar.28.2018 - For In App Purchase Validation checker
+# =================================================
+- description: Pro Version with IAP Validation
+  url: /publish/iapValidation_proVersion
+  schedule: every day 6:00
+  timezone: America/Toronto
+
+# =================================================
+# Mar.29.2018 - Code Validation for Pro Version
+# =================================================
+- description: Pro Version with code Validation
+  url: /publish/codeValidation_proVersion
+  schedule: every day 6:00
+  timezone: America/Toronto

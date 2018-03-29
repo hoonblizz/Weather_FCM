@@ -28,8 +28,38 @@ const bigquery = require('@google-cloud/bigquery')({
   keyFilename: 'keyFiles/' + keys.keyFileName
 });
 
+// DataStore Implementation
+// https://cloud.google.com/appengine/docs/flexible/nodejs/using-cloud-datastore
+// Library references: 
+// https://cloud.google.com/datastore/docs/reference/libraries#client-libraries-install-nodejs
+// https://cloud.google.com/nodejs/docs/reference/datastore/1.4.x/
+const datastore = require('@google-cloud/datastore')({
+	projectId: keys.googleProjectId,
+	keyFilename: 'keyFiles/' + keys.keyFileName
+});
+
+// Key is formed with [<kind>, <Name/ID>]
+// for example, const key = datastore.key(['Company', 'Google']);
+// Kind = datastore table name
+// Name/ID = datastore specific element. Name = string, ID = Integer <-- important
+const datastore_kind = keys.datastore_userProfile_kind;
+
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
+
+// https://github.com/voltrue2/in-app-purchase
+// Where is public Key?
+// https://developer.android.com/google/play/billing/billing_integrate.html
+// Play console -> Services & APIs -> 'Your license key for this application'
+var iap = require('in-app-purchase');	// Mar.28.2018 - Added:
+iap.config({
+	test: true,
+	googlePublicKeyStrSandbox: keys.googlePlayPublicKeyStrSandbox,
+  googlePublicKeyStrLive: keys.googlePlayPublicKeyStrLive
+	//googleClientID: keys.googlePlayWebClientID,
+	//googleClientSecret: keys.googlePlayWebClientSecret,
+	//googleRefToken: '<Google Play refresh token>'
+});
 
 function queueNotificationJobs() {
 
@@ -1002,6 +1032,177 @@ exports.getSunscreenDataFromBigquery = functions.https.onRequest((req, res) => {
   });
 
 });
+
+// ========================================================================
+// In App Purchase & Datastore
+// Mar.28.2018 - For each user, check IAP receipt and check if its valid, 
+// then if its not, modify profile
+/*
+  google receipt must be provided as an object. Data can be object or string.
+  {
+    "data": {
+    	"packageName":"...",
+    	"productId":"...",
+    	"purchaseTime":1456139019030,
+    	"purchaseState":0,
+    	"purchaseToken":"...",
+    	"autoRenewing":true
+    },
+    "signature": "signature from google"
+  }
+*/
+// Library Ref:
+// https://cloud.google.com/nodejs/docs/reference/datastore/1.4.x/Datastore
+// ========================================================================
+exports.iapValidation_proVersion =
+	functions.pubsub.topic('iapValidation_proVersion').onPublish((event) => {
+		
+		function datastoreQuery (query) {
+			return new Promise((resolve, reject) => {
+
+				datastore.runQuery(query, function(err, entities) {
+					if(err) reject('Error in Datastore Query: ' + err);
+				  if(entities && entities.length > 0) {
+				  	
+					  resolve(entities);
+
+				  } else reject('No entities exist!');
+  
+				});
+
+			});
+		}
+
+		function datastoreSetData (key, userData) {
+			return new Promise((resolve, reject) => {
+				datastore.save({
+        	key: key,
+        	excludeFromIndexes: [		// This allows to store longer than 1500 bytes. See library reference for more.
+				    'iapRecords'
+				  ],
+					data: userData
+        }, (err) => {
+				  if (!err) resolve(true);
+				  else reject(err);
+				});
+			});
+		}
+
+		function iapValidationProcess (targetEntity) {
+			return new Promise((resolve, reject) => {
+
+				// this returns something like, '{"id":"5641263013429248","kind":"qtempProfile","path":["qtempProfile","5641263013429248"]}'
+			  // we can use 'path' as 'key' later
+				var targetEntityKey = targetEntity[datastore.KEY];
+
+				// Create a form to attach at the front of all messages
+				var targetUserText = '[' + targetEntity.email + '][' + targetEntity.accountBelonging + '][' + targetEntityKey.id + ']';
+
+				//console.log(targetUserText + ' Target Entity Key from query: ' + JSON.stringify(targetEntityKey)); 
+
+				if(targetEntity && targetEntity.hasOwnProperty('iapRecords') && targetEntity.iapRecords) {
+					
+			  	var receiptArray = JSON.parse(targetEntity.iapRecords);
+			  	if(receiptArray.length > 0) {
+
+			  		//console.log(targetUserText + ' Parsing IAP receipts success: Length [' + receiptArray.length + '] receipts exist');
+
+			  		// filter to find matching product ID. Assume there's only one.(???)
+			  		var filteredReceiptArray = receiptArray.filter((el) => { return el.productId === keys.iapProduct_proVersion; });
+
+			  		if(filteredReceiptArray.length > 0) {
+			
+			  			var resultReceipt = {};
+
+			  			// Form receipt based on what properties they have.
+			  			if(filteredReceiptArray[0].hasOwnProperty('signature') && filteredReceiptArray[0].hasOwnProperty('receipt')) {
+			  				resultReceipt = {
+				  				'signature': filteredReceiptArray[0].signature,
+				  				'data': filteredReceiptArray[0].receipt
+				  			}
+			  			}
+
+			  			iap.setup((err) => {
+						    if(err) reject(targetUserText + ' Error in IAP setup: ' + err);
+						    
+						    // iap is ready
+						    iap.validate(resultReceipt, function (err, googleRes) {
+					        if (err) reject(targetUserText + ' Error in IAP Validation: ' + err);
+					        if (iap.isValidated(googleRes)) {
+
+					        	console.log(targetUserText + ' IAP Valid!! ');
+					        	resolve(true);
+					          	
+					        } else {
+
+					        	console.log(targetUserText + ' IAP Invalid!! ');
+					        	
+					        	// If data is set to true, change to false
+					          if(targetEntity.proActivated) {
+					          
+											let key = datastore.key([targetEntityKey.kind, Number(targetEntityKey.id)]);
+											//let key = datastore.key({path: targetEntityKey.path});
+
+											var userData = JSON.parse(JSON.stringify(targetEntity));
+											userData.proActivated = false;		// boolean	
+											userData.proActivatedMethod	 = 0;	// integer. 0 - unset, 1 - code typed, 2 - IAP
+
+											datastoreSetData(key, userData)
+											.then(() => {
+												console.log(targetUserText + ' IAP Invalid but profile says Valid!! ' + JSON.stringify(googleRes));
+											  resolve(true);
+											})
+											.catch((err) => {
+												reject(targetUserText + ' Error in saving new profile data: ' + err);
+											});
+					          } else resolve(true);
+					        	
+					        }
+
+						    });
+							});
+
+			  		} else reject(targetUserText + ' Product Not Exists!');
+			  	} else reject(targetUserText + ' Parsing array failed for IAP receipt');
+			  } else resolve(true);
+
+			});
+		}
+
+		return new Promise((resolve, reject) => {
+
+			var promiseArray = [];
+
+			// Query
+			const query = datastore.createQuery(datastore_kind);
+			query.filter('proActivatedMethod	', 2);//.filter('accountBelonging', 'google');
+
+			datastoreQuery(query)
+			.then((entitiesArray) => {
+
+				console.log('Result from query: ['+ entitiesArray.length +'] user profiles Found!');
+				// When multiple entities are presented, use array of promise to handle it. 
+			 	for(var i = 0; i < entitiesArray.length; i++) promiseArray.push(iapValidationProcess(entitiesArray[i]));
+
+			 	return Promise.all(promiseArray);
+
+			})
+			.then(() => {
+				console.log('Query Job all done!!!');
+			})
+			.catch((err) => {
+				reject(err);
+			});
+			
+		});
+
+	});
+
+exports.codeValidation_proVersion =
+	functions.pubsub.topic('codeValidation_proVersion').onPublish((event) => {
+		
+	});
+
 
 // ========================================================================
 //  UV Forecast Functions
